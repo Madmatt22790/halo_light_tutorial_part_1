@@ -1,5 +1,5 @@
 {
-    "name": "Halo_ight_Tutorial_ Part_1",
+    "name": "halo_light_tutorial_ Part_1",
     "description": "",
     "dependencies": {
         "core": "*",
@@ -7,7 +7,6 @@
         "microphone": "*"
     },
     "files": [
-        "main.blocks",
         "main.ts",
         "README.md"
     ],
@@ -21,5 +20,5 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
