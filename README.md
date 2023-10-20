@@ -3,7 +3,7 @@
 
 ## Tutorials
 
-# [tutorial](/halo_light_tutorial_Part_1/tutorial)
+# [Tutorial](/halo_light_tutorial_Part_1/tutorial.md)
 
 ## Edit this project
 
