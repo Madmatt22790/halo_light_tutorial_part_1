@@ -1,14 +1,9 @@
 
 > Open this page at [https://madmatt22790.github.io/halo_light_tutorial_part_1/](https://madmatt22790.github.io/halo_light_tutorial_part_1/)
 
-## Use as Extension
+## Tutorials
 
-This repository can be added as an **extension** in MakeCode.
-
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/madmatt22790/halo_light_tutorial_part_1** and import
+# [tutorial](/tutorial)
 
 ## Edit this project
 
