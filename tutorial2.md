@@ -32,3 +32,8 @@ Hints will be displayed in here.
 The first step is to add the NeoPixel extension to our microbit.
 
 ``||Neopixel: Testing||``
+
+```blocks
+let strip: neopixel.Strip = null
+
+```
