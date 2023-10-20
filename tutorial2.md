@@ -29,3 +29,6 @@ In this part of the tutorial we will be adding functionality for the Halo Light 
 Hints will be displayed in here.
 ```
 ## Step 1
+The first step is to add the NeoPixel extension to our microbit.
+
+``||Neopixel: Testing||``
