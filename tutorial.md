@@ -166,7 +166,7 @@ function changetime () {
 ## Part 1 Complete
 That is it for the first part of this tutorial. Check your code to make sure it is the same as in the hint.
 
-Part 2 can be found here.
+Part 2 can be found [here](https://makecode.microbit.org/#tutorial:github:madmatt22790/halo_light_tutorial_part_1/tutorial2).
 ```blocks
 let minutes = 0
 let hours = 1
@@ -189,5 +189,3 @@ function changetime () {
     }
 }
 ```
-
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
