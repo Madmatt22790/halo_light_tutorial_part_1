@@ -32,7 +32,7 @@ In this part of the tutorial we will be adding functionality for the Halo Light 
 ```
 Hints will be displayed in here.
 ```
-## Step 1 @unplugged
+## Step 1
 The first step is to initiate the halo light and assign it to a variable called strip.
 
 Do this by dragging the provided ``||neopixel: set strip to Nepixel at P0 with 24 leds as RGB (GRB format)||``
