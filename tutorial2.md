@@ -35,8 +35,13 @@ Hints will be displayed in here.
 ## Step 1
 The first step is to initiate the halo light and assign it to a variable called strip.
 
-Do this by dragging the provided ``||neopixel: set strip to Nepixel at P0 with 24 leds as RGB (GRB format)||``
+Do this by dragging the provided ``||neopixel: set strip to Nepixel||`` into the on start block
 
 ```blocks
+let minutes = -0
+let hours = 1
 strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
 ```
+
+## Step 2
+Next we are going to make a custom function which will 
