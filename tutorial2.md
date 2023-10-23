@@ -31,9 +31,4 @@ Hints will be displayed in here.
 ## Step 1
 The first step is to add the NeoPixel extension to our microbit.
 
-``||Neopixel: Testing||``
-
-```blocks
-let strip: neopixel.Strip = null
-
-```
+Select the ![microbit_settings](/static/microbit_settings.jpg)
