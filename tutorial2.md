@@ -18,6 +18,10 @@ function changetime () {
     }
 }
 ```
+
+```package
+neopixel=github:microsoft/pxt-neopixel#v0.7.5
+```
 # Halo Light Clock Part 2
 ## Introduction
 This tutorial is a continuation of the previous tutorial which can be found [here](https://makecode.microbit.org/#tutorial:github:madmatt22790/halo_light_tutorial_part_1/tutorial).
@@ -31,4 +35,11 @@ Hints will be displayed in here.
 ## Step 1 @unplugged
 The first step is to add the NeoPixel extension to our microbit.
 
-Select the ![Microbit Settings Image](/static/microbit_settings.jpeg)
+1. Select the gear icon in the top right corner
+2. Choose the extensions option
+3. In the search bar type NeoPixel
+4. Select the NeoPixel extension in the list for it to be installed.
+
+```blocks
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
