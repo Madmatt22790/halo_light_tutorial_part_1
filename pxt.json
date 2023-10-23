@@ -1,6 +1,6 @@
 {
     "name": "halo_light_tutorial_ Part_1",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "description": "",
     "dependencies": {
         "core": "*",
