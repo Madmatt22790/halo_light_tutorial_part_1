@@ -33,12 +33,9 @@ In this part of the tutorial we will be adding functionality for the Halo Light 
 Hints will be displayed in here.
 ```
 ## Step 1 @unplugged
-The first step is to add the NeoPixel extension to our microbit.
+The first step is to initiate the halo light and assign it to a variable called strip.
 
-1. Select the gear icon in the top right corner
-2. Choose the extensions option
-3. In the search bar type NeoPixel
-4. Select the NeoPixel extension in the list for it to be installed.
+Do this by dragging the provided ``||neopixel: set strip to Nepixel at P0 with 24 leds as RGB (GRB format)||``
 
 ```blocks
 strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
