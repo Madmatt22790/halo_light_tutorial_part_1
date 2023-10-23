@@ -31,4 +31,4 @@ Hints will be displayed in here.
 ## Step 1
 The first step is to add the NeoPixel extension to our microbit.
 
-Select the ![microbit_settings](/static/microbit_settings.jpg)
+Select the ![Microbit Settings Image](/static/microbit_settings.jpeg)
