@@ -83,16 +83,17 @@ For this tutorial we are going to light up 2 more LED's every 5 minutes so that 
 
 You will be able to choose the colours of the LEDS' as we go along.
 
-First we need to check if the current amount of minutes is a multiple of 5 to determine how many LED's need to be lit up. 
+First we need to create a new variable called ``||variable: index||`` this will be used in a loop to count how many times the loop has run.
 
-We do this with an ``||Logic: if||`` statement block. 
+Now drag the ``||variables: set index to 0||`` block and place it underneath the strip clear block. Change the 0 to a 1.
 
-Drag this underneath the ``||neopixel: strip clear||`` block
+Next we are going to drag a ``||loops: while||`` loop in and place it underneath our strip clear block.
 ```blocks
 function lights () {
     strip.clear()
+    let index = 1
     // @highlight
-    if (true) {}
+    while (false) {}
 }
 let strip: neopixel.Strip = null
 let minutes = 0
@@ -103,18 +104,16 @@ strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
 ```
 
 ## Step 5
-Within the ``||logic: if||`` statement block is a diamond shaped space where we put in our comparison block where we can compare two data types. In this case we are going to compare the remainder of our minutes divided by 5.
+Next we are need to tell the while loop when to stop running. This is determined by whatever logic we place into the diamond shaped space on the block. Currently it is set to false.
 
-If there is no remainder then the number is divisible by 5 otherwise it isn't.
+Within our Logic tab drag a diamond ``||logic: comparision||`` block into the space on the block.
 
-For example if our minutes is at 45 and we divide it by 5 then the remainder will be 0. However if we divide 42 by 5 then we will have a remainder of 2 meaning it isn't divisible by 5.
-
-To add this logic we are going to drag a ``||logic: 0 = 0||`` block and place it into that diamond space. 
-
+Drag our ``||variables: index||`` variable into the first 0 space on the comparision block.
 ```blocks
 function lights () {
     strip.clear()
-    if (0 == 0) {}
+    let index = 1
+    while (index <= 0) {}
 }
 let strip: neopixel.Strip = null
 let minutes = 0
@@ -124,18 +123,74 @@ minutes = 0
 strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
 ```
 
-## Step 6 
-Next we need to get the remainder of our minutes divided by 5. 
+## Step 6
+Now we need to do some maths. We want our LED's to light up in batches of two but only if the minutes is divisible by 5.
 
-Thankfully there is a block for this ``||math: remainder of 0/1||``
+First we need to check how many should be lit up when we divide our minutes by 5.
 
-Drag this in place of the first 0 in our ``||logic: comparison block||``
+The first problem is that if we just do a simple division numbers which aren't divisible by 5 will end up being decimals which will not work for telling the strip which LED's to light up.
 
-Then drag the ``||variable: minutes||`` variable into the place of the 0 in the math block and then change the 1 to a 5.
+So for this reason we are going to want to always round down our number after it has been divided so that it is always a whole number rather than a fraction.
+
+In coding we use a special block called ``||math: floor||`` which will take whatever number is put in and round it down to the nearest whole number. Drag this into the second 0 space in the comparison block.
+
+You can get this block by dragging the ``||math: round||`` block in and changing it to floor with the drop down menu.
 ```blocks
 function lights () {
     strip.clear()
-    if (minutes % 5 == 0) {}
+    let index = 1
+    while (index <= Math.floor(0)) {}
+}
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
+## Step 7
+The next problem we need to solve is that if we simply divide our minutes by 5 our number is going to be too small. 
+
+For example if the minutes is at 60 and we divide it by 5 we will get 12 but we want all 24 lights be lit up. So to solve this we are going to multiple the end number by 2
+
+Our equation is going to look like this minutes / 5 * 2. Which is then rounded down.
+
+Using our Maths blocks we can drag in the appropriate equations so that our final equation looks like it does in the hints of this step. 
+```blocks
+function lights () {
+    strip.clear()
+    let index = 1
+    while (index <= Math.floor(minutes/5*2)) {}
+}
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
+
+## Step 8
+Now we can start lighting up the Halo Light. 
+
+We do this by dragging a ``||neopixel: strip set pixel color at 0 to red||`` into our ``||loops: while||`` loop block.
+
+The way this block works is that it sets the colour of of an LED to an indicated colour. 
+
+The LED's are assigned a number with 0 being the top LED and continuing around in a clockwise fashion until 24.
+
+This brings us to the reason that we set the inital index to 1 because we are going to loop through and change the colour of the LED which matches the index number and the LED whose number is 1 less than the current index value.
+
+Let start by setting the colour of the first LED which will be referenced by the current index value minus 1.
+
+Drag a maths block into the 0 of the set pixel colour block, change the symbol to minus then drag the index varaible to the left of the minus and change the 0 to a 1.
+```blocks
+function lights () {
+    strip.clear()
+    let index = 1
+    while (index <= Math.floor(minutes/5*2)) {
+        strip.setPixelColor(index - 1, neopixel.colors(NeoPixelColors.Red))
+    }
 }
 let strip: neopixel.Strip = null
 let minutes = 0
