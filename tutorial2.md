@@ -48,7 +48,28 @@ Next we are going to make a custom function which will make the lights, display 
 
 Under the ``||function:Functions||`` tab choose Make a Function and call this Function ``||function: lights||``
 
+We are also going to drag in the ``||function: call lights||`` block and place it underneath the ``||basic: show number||`` block so that the function we are about create is run just after the hours are displayed.
+
 ```blocks
+basic.forever(function () {
+    basic.showNumber(hours)
+    // @highlight
+    lights()
+    basic.pause(60000)
+    minutes += 1
+    changetime()
+})
+
+function changetime () {
+    if (minutes == 60) {
+        hours += 1
+        minutes = 0
+    }
+    if (hours == 13) {
+        hours = 1
+    }
+}
+
 function lights() {
 }
 ```
@@ -128,7 +149,7 @@ Now we need to do some maths. We want our LED's to light up in batches of two bu
 
 First we need to check how many should be lit up when we divide our minutes by 5.
 
-The first problem is that if we just do a simple division numbers which aren't divisible by 5 will end up being decimals which will not work for telling the strip which LED's to light up.
+The first problem is that if we just do a simple division, numbers which aren't divisible by 5 will end up being decimals which will not work for telling the strip which LED's to light up.
 
 So for this reason we are going to want to always round down our number after it has been divided so that it is always a whole number rather than a fraction.
 
@@ -198,4 +219,148 @@ let hours = 0
 hours = 1
 minutes = 0
 strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
+
+## Step 9
+For the colour rather than using the drop down menu to choose a default colour we are going to creat our own custom colours using RGB
+
+RGB stands for the three colours which are used to make other colours. Red, Green, Blue
+
+Depending on the values you choose for each of those colours will depend on the final colour that you get. 
+
+The smallest value that one of the colours can be is 0 with the greatest being 255.
+
+Within the more part of the ``||neopixel: neopixel||`` section is a round block that allows you define the values for red, green, and blue. 
+
+Drag this block in place of the default colour drop down menu. 
+```blocks
+function lights () {
+    strip.clear()
+    let index = 1
+    while (index <= Math.floor(minutes/5*2)) {
+        // @highlight
+        strip.setPixelColor(index - 1, neopixel.rgb(255,255,255))
+    }
+}
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
+
+## Step 9
+Lets repeat these last few steps to set the colour of the second LED. This is going to be done by duplicating the block. This can easily be done by right clicking on the set pixel color at choosing duplicate. 
+
+This will create another block which you can place below. the only thing you need to do is remove the -1 so that it is changing the LED in position index.
+```blocks
+function lights () {
+    strip.clear()
+    let index = 1
+    while (index <= Math.floor(minutes/5*2)) {
+        strip.setPixelColor(index - 1, neopixel.rgb(255,255,255))
+        // @highlight
+        strip.setPixelColor(index, neopixel.rgb(255,255,255))
+    }
+}
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
+
+## Step 10
+Next we are going to change the brightness of the LED's as you may not like them being at full brightness.
+
+To do this drag in the ``||neopixel: Set Brightness||`` block and place it underneath our two set pixel blocks.
+
+Like the RGB values the lowest the brightness can be is 0 (which is off) and 255 (Which is full brightness)
+
+Change the value to a number and find a brightness value which works for you.
+
+```blocks
+function lights () {
+    strip.clear()
+    let index = 1
+    while (index <= Math.floor(minutes/5*2)) {
+        strip.setPixelColor(index - 1, neopixel.rgb(255,255,255))
+        strip.setPixelColor(index, neopixel.rgb(255,255,255))
+        // @highlight
+        strip.setBrightness(10)
+    }
+}
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
+
+## Step 11
+Finally we meed to increase the index by 2 so it can light up the next set of two LED'second
+
+Drag in from the ``||variables: variables||`` section a Change index by 1 block and change the 1 to a 2.
+
+```blocks
+function lights () {
+    strip.clear()
+    let index = 1
+    while (index <= Math.floor(minutes/5*2)) {
+        strip.setPixelColor(index - 1, neopixel.rgb(255,255,255))
+        strip.setPixelColor(index, neopixel.rgb(255,255,255))
+        strip.setBrightness(10)
+        // @highlight
+        index += 2
+    }
+}
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+```
+
+## Conclusion
+The last thing you need to do after pressing finish here is to switch the coding mode from Blocks to Javascript and change the RGB values to a custom number. 
+
+With that we have now added to our code so that it will now light up the ring to show the minutes of our clock as they elapse.
+```blocks
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+basic.forever(function () {
+    basic.showNumber(hours)
+    basic.pause(60000)
+    minutes += 1
+    changetime()
+})
+
+function changetime () {
+    if (minutes == 60) {
+        hours += 1
+        minutes = 0
+    }
+    if (hours == 13) {
+        hours = 1
+    }
+}
+
+function lights () {
+    strip.clear()
+    let index = 1
+    while (index <= Math.floor(minutes/5*2)) {
+        strip.setPixelColor(index - 1, neopixel.rgb(255,255,255))
+        strip.setPixelColor(index, neopixel.rgb(255,255,255))
+        strip.setBrightness(10)
+        index += 2
+    }
+}
 ```
