@@ -31,6 +31,7 @@ function lights () {
         strip.setBrightness(10)
         index += 2
     }
+    strip.show()
 }
 ```
 
