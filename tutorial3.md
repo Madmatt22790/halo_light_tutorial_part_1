@@ -47,4 +47,92 @@ If you havent completed the two tutorials yet then do so before starting this on
 In this part of the tutorial we will be adding a function to set the time manually using the buttons on the micro:setBrightness
 
 ## Step 1
+First we need to create a variable that stores a Boolean.
 
+A Boolean is either true or false and we are going to use ours to store whether we are setting the time (true) or not setting the time (false).
+
+Under the ``||variables: variables||`` heading choose "Make a Variable" and name this variable "reset".
+
+Drag the ``||variables: set reset to 0||`` block into the starting code block.
+
+```blocks
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+// @highlight
+let reset = 0
+```
+
+## Step 2
+Next we need to define what are starting state for our reset variable is going to be.
+
+Under the ``||variables: variables||`` section there are two diamond blocks one saying true the other false. Despite these blocks being a diamond shape and our variable being a circular shape the diamond true block can be dragged into a variable.
+
+Do this to set our reset variable to start as false.
+
+```blocks
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+// @highlight
+let reset = false
+```
+
+## Step 3
+Now we need a way to tell the microbit to enter into the time reset state at the push of a button. 
+
+We are going to do this by pressing the A and B buttons simultaniously. We can set what happens when these button are pressed by going into the ``||input: input||`` section and dragging an "on button A pressed" block into the workspace and using the drop down menu on this block change it to A+B. 
+```blocks
+input.onButtonPressed(Button.AB, function () {})
+```
+
+## Step 4
+Within this function we need the code to set the reset variable to true if both buttons are pressed and if the reset variable is currently set to false and then do the opposite.
+
+For this we are going to use an if and else statement. Drag one of those into the block from the ``||logic: logic||`` section.
+```blocks
+input.onButtonPressed(Button.AB, function () {
+    // @highlight
+    if (true) {
+    } else {
+    }
+})
+```
+
+## Step 5
+Now we are going to check if the reset is true. Do this by grabbing a comparison block and placing it in the section of the if and else block that currently says true.
+
+Next drag in our ``||variables: reset||`` variable to the first circular spot on the comparision block.
+
+Then finally drag a ``||logic: true||`` block and place it in the second circular spot.
+```blocks
+input.onButtonPressed(Button.AB, function () {
+    // @highlight
+    if (reset == true) {
+    } else {
+    }
+})
+```
+
+## Step 6
+By dragging in a ``||variables: set||`` block from the variabls section into the upper portion of the if statement we can change the Boolean stored within reset to false. Do this by changing the appropriate parameters on the ``||variables: set||`` block.
+
+Then by dragging in another one into the bottom section we can make it set the variable to true if reset is not equal to true and set the Boolean to true instead.
+
+We have essentially made a toggle switch that we switch us in and out of reset mode when the A and B buttons are pressed simulatinously.
+```blocks
+input.onButtonPressed(Button.AB, function () {
+    // @highlight
+    if (reset == true) {
+        reset = false
+    } else {
+        reset = true
+    }
+})
+```
