@@ -305,6 +305,7 @@ Finally we meed to increase the index by 2 so it can light up the next set of tw
 
 Drag in from the ``||variables: variables||`` section a Change index by 1 block and change the 1 to a 2.
 
+Along with this we need to tell the Halo Light to show the lights that we have set. We can do this by dragging in a ``||neopixel: strip show||`` block underneath the loop, at the very end of this code section.
 ```blocks
 function lights () {
     strip.clear()
@@ -316,6 +317,8 @@ function lights () {
         // @highlight
         index += 2
     }
+    // @highlight
+    strip.show()
 }
 let strip: neopixel.Strip = null
 let minutes = 0
@@ -362,5 +365,6 @@ function lights () {
         strip.setBrightness(10)
         index += 2
     }
+    strip.show()
 }
 ```
