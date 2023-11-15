@@ -10,6 +10,7 @@ basic.forever(function () {
     basic.pause(60000)
     minutes += 1
     changetime()
+    lights()
 })
 
 function changetime () {
@@ -121,7 +122,7 @@ input.onButtonPressed(Button.AB, function () {
 ```
 
 ## Step 6
-By dragging in a ``||variables: set||`` block from the variabls section into the upper portion of the if statement we can change the Boolean stored within reset to false. Do this by changing the appropriate parameters on the ``||variables: set||`` block.
+By dragging in a ``||variables: set||`` block from the variables section into the upper portion of the if statement we can change the Boolean stored within reset to false. Do this by changing the appropriate parameters on the ``||variables: set||`` block.
 
 Then by dragging in another one into the bottom section we can make it set the variable to true if reset is not equal to true and set the Boolean to true instead.
 
@@ -134,5 +135,21 @@ input.onButtonPressed(Button.AB, function () {
     } else {
         reset = true
     }
+})
+```
+
+## Step 7
+Now we need to make this toggle switch do something. First we want to make it stop the clock and pause it so that it no longer upticks the minutes variable. 
+
+We will need to modify the code within the ``||basic: forever||`` loop.
+
+Drag an ``||logic: if||`` statement block in and place it at the top of the ``||basic: forever||`` loop.
+```blocks
+basic.forever(function () {
+    basic.showNumber(hours)
+    basic.pause(60000)
+    minutes += 1
+    changetime()
+    lights()
 })
 ```
