@@ -48,16 +48,16 @@ Next we are going to make a custom function which will make the lights, display 
 
 Under the ``||function:Functions||`` tab choose Make a Function and call this Function ``||function: lights||``
 
-We are also going to drag in the ``||function: call lights||`` block and place it underneath the ``||basic: show number||`` block so that the function we are about create is run just after the hours are displayed.
+We are also going to drag in the ``||function: call lights||`` block and place it underneath the ``||function: changetime||`` block so that the function we are about create is run just after the time is updated.
 
 ```blocks
 basic.forever(function () {
     basic.showNumber(hours)
-    // @highlight
-    lights()
     basic.pause(60000)
     minutes += 1
     changetime()
+    // @highlight
+    lights()
 })
 
 function changetime () {
@@ -344,6 +344,7 @@ basic.forever(function () {
     basic.pause(60000)
     minutes += 1
     changetime()
+    lights()
 })
 
 function changetime () {
