@@ -146,10 +146,59 @@ We will need to modify the code within the ``||basic: forever||`` loop.
 Drag an ``||logic: if||`` statement block in and place it at the top of the ``||basic: forever||`` loop.
 ```blocks
 basic.forever(function () {
+    // @highlight
+    if (true) {}
     basic.showNumber(hours)
     basic.pause(60000)
     minutes += 1
     changetime()
     lights()
 })
+// @hide
+function changetime () {}
+// @hide
+function lights() {}
+```
+
+## Step 8
+Inside this if statement drag in the 
+- show number block
+- pause block
+- change minutes block.
+```blocks
+basic.forever(function () {
+    // @highlight
+    if (true) {
+        basic.showNumber(hours)
+        basic.pause(60000)
+        minutes += 1
+    }
+    changetime()
+    lights()
+})
+// @hide
+function changetime () {}
+// @hide
+function lights() {}
+```
+
+## Step 9
+We now need to define when this if function will run what is inside of it. 
+Drag a diamond ``||logic: comparison||`` block into the space on the if statement block. Then drag the reset variable into the first space, make sure the comparison is set to = then finally drag a false diamond block into the other side of the comparison block.
+
+This means that whenever we aren't in reset mode it will continue to calculate the time.
+```blocks
+basic.forever(function () {
+    if (reset == false) {
+        basic.showNumber(hours)
+        basic.pause(60000)
+        minutes += 1
+    }
+    changetime()
+    lights()
+})
+// @hide
+function changetime () {}
+// @hide
+function lights() {}
 ```
