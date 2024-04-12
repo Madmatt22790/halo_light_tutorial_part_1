@@ -45,7 +45,7 @@ This tutorial is a continuation of the previous two tutorial which can be found 
 
 If you havent completed the two tutorials yet then do so before starting this one.
 
-In this part of the tutorial we will be adding a function to set the time manually using the buttons on the micro:setBrightness
+In this part of the tutorial we will be adding a function to set the time manually using the buttons on the microBit
 
 ## Step 1
 First we need to create a variable that stores a Boolean.
@@ -68,7 +68,7 @@ let reset = 0
 ```
 
 ## Step 2
-Next we need to define what are starting state for our reset variable is going to be.
+Next we need to define what the starting state for our reset variable is going to be.
 
 Under the ``||variables: variables||`` section there are two diamond blocks one saying true the other false. Despite these blocks being a diamond shape and our variable being a circular shape the diamond true block can be dragged into a variable.
 
@@ -88,7 +88,7 @@ let reset = false
 ## Step 3
 Now we need a way to tell the microbit to enter into the time reset state at the push of a button. 
 
-We are going to do this by pressing the A and B buttons simultaniously. We can set what happens when these button are pressed by going into the ``||input: input||`` section and dragging an "on button A pressed" block into the workspace and using the drop down menu on this block change it to A+B. 
+We are going to do this by pressing the A and B buttons simultaneously. We can set what happens when these button are pressed by going into the ``||input: input||`` section and dragging an "on button A pressed" block into the workspace and using the drop down menu on this block change it to A+B. 
 ```blocks
 input.onButtonPressed(Button.AB, function () {})
 ```
@@ -126,7 +126,7 @@ By dragging in a ``||variables: set||`` block from the variables section into th
 
 Then by dragging in another one into the bottom section we can make it set the variable to true if reset is not equal to true and set the Boolean to true instead.
 
-We have essentially made a toggle switch that we switch us in and out of reset mode when the A and B buttons are pressed simulatinously.
+We have essentially made a toggle switch that will switch us in and out of reset mode when the A and B buttons are pressed simultaneously.
 ```blocks
 input.onButtonPressed(Button.AB, function () {
     // @highlight
@@ -151,49 +151,6 @@ basic.forever(function () {
     basic.showNumber(hours)
     basic.pause(60000)
     minutes += 1
-    changetime()
-    lights()
-})
-// @hide
-function changetime () {}
-// @hide
-function lights() {}
-```
-
-## Step 8
-Inside this if statement drag in the 
-- show number block
-- pause block
-- change minutes block.
-```blocks
-basic.forever(function () {
-    // @highlight
-    if (true) {
-        basic.showNumber(hours)
-        basic.pause(60000)
-        minutes += 1
-    }
-    changetime()
-    lights()
-})
-// @hide
-function changetime () {}
-// @hide
-function lights() {}
-```
-
-## Step 9
-We now need to define when this if function will run what is inside of it. 
-Drag a diamond ``||logic: comparison||`` block into the space on the if statement block. Then drag the reset variable into the first space, make sure the comparison is set to = then finally drag a false diamond block into the other side of the comparison block.
-
-This means that whenever we aren't in reset mode it will continue to calculate the time.
-```blocks
-basic.forever(function () {
-    if (reset == false) {
-        basic.showNumber(hours)
-        basic.pause(60000)
-        minutes += 1
-    }
     changetime()
     lights()
 })
