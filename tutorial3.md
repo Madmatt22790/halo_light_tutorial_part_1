@@ -2,6 +2,7 @@
 let strip: neopixel.Strip = null
 let minutes = 0
 let hours = 0
+let index = 0
 hours = 1
 minutes = 0
 strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
@@ -158,4 +159,394 @@ basic.forever(function () {
 function changetime () {}
 // @hide
 function lights() {}
+```
+
+## Step 8
+Inside this if statement drag in the following blocks
+- show number block
+- pause block
+- change minutes block.
+
+```blocks
+basic.forever(function () {
+    // @highlight
+    if (true) {
+        basic.showNumber(hours)
+        basic.pause(60000)
+        minutes += 1
+    }
+    changetime()
+    lights()
+})
+// @hide
+function changetime () {}
+// @hide
+function lights() {}
+```
+
+## Step 9
+We now need to define when the clock is allowed to continue counting the minutes
+Drag a diamond ``||logic: comparison||`` block into the space on the if statement block. Then drag the reset variable into the first space, make sure the comparison is set to = then finally drag a false diamond block into the other side of the comparison block.
+
+This means that whenever the reset variable is equal to false (meaning we aren't reseting the time) then it will continue adding time to the appropriate variables. 
+```blocks
+basic.forever(function () {
+    if (reset == false) {
+        basic.showNumber(hours)
+        basic.pause(60000)
+        minutes += 1
+    }
+    changetime()
+    lights()
+})
+// @hide
+function changetime () {}
+// @hide
+function lights() {}
+```
+
+## Step 10
+Now that we have stopped the time we need to create a way for us to switch between setting the minutes or hours.
+
+Once we are in reset mode we are going to set it so that when we press the A button that it will increase the hours variable and when the B button is pressed it will increase the minutes variable.
+
+Drag in an "on button A pressed from the ``||input: input||`` section and place an if statement from the ``||logic: logic||``section. (It isn't necessary to use the if & else statment as just an if statement block will do)
+
+```blocks
+input.onButtonPressed(Button.A, function () {
+    if (true) {
+    }
+})
+```
+
+## Step 11
+We want to make sure that the button presses only do something when we are in reset mode. So we need to add a comparison block into the if statement similar to a couple of steps ago to ensure whatever is put into the if statement block happens when we are in reset mode.
+
+Drag a diamond ``||logic: comparison||`` block into the space on the if statement block. Then drag the reset variable into the first space, make sure the comparison is set to = then finally drag a true diamond block into the other side of the comparison block.
+
+This means that whenever the reset variable is equal to true (meaning we are reseting the time) then it will run the code when the A button is pressed.
+
+```blocks
+input.onButtonPressed(Button.A, function () {
+    // @highlight
+    if (reset == true) {
+    }
+})
+```
+
+## Step 12
+Inside this if statement block we are going to place two blocks: once to increase the hours variable, and the other to displace the hours variable value. 
+
+Drag a ``||variables: change hours by 1||`` block inside the if statement. Then drag a ``||basic: show number||`` inside the if statement.
+
+Drag the circular hours variable from the ``||variables: variables||`` tab into the space on the ``||basic: show number||`` block.
+
+```blocks
+input.onButtonPressed(Button.A, function () {
+    if (reset == true) {
+        // @highlight
+        hours += 1
+        // @highlight
+        basic.showNumber(hours)
+    }
+})
+```
+
+## Step 12
+Now let's do the same for the minutes variable with an ``||input: on button B pressed||`` block from the input section. Place in our if statement block then add in the blocks to change the minutes variable and display the minutes variable as a number.
+
+```blocks
+input.onButtonPressed(Button.B, function () {
+    if (reset == true) {
+        minutes += 1
+        basic.showNumber(minutes)
+    }
+})
+```
+
+## Step 13
+Next we want some way to indicate to the user what variable they are currently changing. We can do this by changing the colours of the LED's. So when we are setting the minutes variable the LED's all display one colour and when doing the hours they display another. 
+
+First we need to create a variable that we can flip back and forth between minutes and hours which the lights will then read to display the correct colours.
+
+There isn't any need to define the variable in the on start function but instead we can do this straight into our On Button pressed functions. 
+
+In both the A and B button press functions place a ``||variable: set to||`` block underneath the ``||variable: change by||`` block. Call the new variable "HoursOrMinutes".
+
+In the A Button function have the HoursOrMinutes variable set to "Hours"
+
+In the B Button function have the HoursOrMinutes variable set to "Minutes"
+
+In the A+B Button function have the HoursOrMinutes variable set to "None
+```blocks
+input.onButtonPressed(Button.A, function () {
+    if (reset == true) {
+        hours += 1
+        HoursOrMinutes = "Hours"
+        basic.showNumber(hours)
+    }
+})
+
+input.onButtonPressed(Button.B, function () {
+    if (reset == true) {
+        minutes += 1
+        HoursOrMinutes = "Minutes"
+        basic.showNumber(minutes)
+    }
+})
+
+input.onButtonPressed(Button.AB, function () {
+    if (reset == true) {
+        reset = false
+        HoursOrMinutes = "None"
+    } else {
+        reset = true
+    }
+})
+```
+
+## Step 14
+Now moving over to our custom lights function we need to add in a nested if and else statement. 
+
+To start this drag an ``||logic: if/else||`` block and place it underneath the strip clear block. Place inside the else section of this logic block our ``||variables: set index to 1||`` block and our ``||loops: while||`` loop.
+
+```blocks
+let strip: neopixel.Strip = null
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+function lights () {
+    strip.clear()
+    if (true) {
+
+    } else {
+        index = 1
+        while (index <= Math.floor(minutes / 5 * 2)) {
+            strip.setPixelColor(index - 1, neopixel.rgb(255, 255, 255))
+            strip.setPixelColor(index, neopixel.rgb(255, 255, 255))
+            strip.setBrightness(10)
+            index += 2
+    }
+    }
+    
+    strip.show()
+}
+```
+
+## Step 15
+Next we want to define what the logic is for the if statement. Drag a ``||logic: comparison||`` block from the logic section and place it in the diamond space of the if/else statement.
+```blocks
+let strip: neopixel.Strip = null
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+function lights () {
+    strip.clear()
+    if (0 == 0) {
+
+    } else {
+        index = 1
+        while (index <= Math.floor(minutes / 5 * 2)) {
+            strip.setPixelColor(index - 1, neopixel.rgb(255, 255, 255))
+            strip.setPixelColor(index, neopixel.rgb(255, 255, 255))
+            strip.setBrightness(10)
+            index += 2
+    }
+    }
+    
+    strip.show()
+}
+```
+
+## Step 16
+Now we need to drag our circular reset ``||variables: variable||`` into the first space then a diamond ``||logic: true||`` block into the second circular space. 
+
+This means that whatever we put into the top secion of the if/else statement will only happen if the reset variable is true. Meaning that we are in reset mode. 
+```blocks
+let strip: neopixel.Strip = null
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+function lights () {
+    strip.clear()
+    if (reset == true) {
+
+    } else {
+        index = 1
+        while (index <= Math.floor(minutes / 5 * 2)) {
+            strip.setPixelColor(index - 1, neopixel.rgb(255, 255, 255))
+            strip.setPixelColor(index, neopixel.rgb(255, 255, 255))
+            strip.setBrightness(10)
+            index += 2
+    }
+    }
+    
+    strip.show()
+}
+```
+
+## Step 17
+Next drag another ``||logic: if/else||`` statement block inside the top section of the first if/else block.
+
+Then press the little plus symbol at the bottom of this block so our new if/else block turns into an if/else if/else block.
+
+```blocks
+let strip: neopixel.Strip = null
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+function lights () {
+    strip.clear()
+    if (reset == true) {
+        // @highlight
+        if (0 == 0) {
+        } else if (0 == 0) {
+        } else {
+        }
+    } else {
+        index = 1
+        while (index <= Math.floor(minutes / 5 * 2)) {
+            strip.setPixelColor(index - 1, neopixel.rgb(255, 255, 255))
+            strip.setPixelColor(index, neopixel.rgb(255, 255, 255))
+            strip.setBrightness(10)
+            index += 2
+    }
+    }
+    
+    strip.show()
+}
+```
+
+## Step 18 
+This logic is going to allow us to give rules for three different scenarios with our "HoursOrMinutes" variable. 
+
+First if the HoursOrMinutes variable is equal to hours display one colour.
+
+Second if the HoursOrMinutes variable is equal to minutes display a different colour.
+
+Lastly if the HoursOrMinutes variable is equal to anything else display a third colour. 
+
+By now you should be familiar with the logic of adding a ``||logic: comparison||`` block and draggin in the circular ``||logic: HoursOrMinutes||`` variable block into the left side of the comparison and on the other side comparing it to the text "Hours" or "Minutes".
+```blocks
+let strip: neopixel.Strip = null
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+function lights () {
+    strip.clear()
+    if (reset == true) {
+        if (HoursOrMinutes == "Hours") {
+        } else if (HoursOrMinutes == "Minutes") {
+        } else {
+        }
+    } else {
+        index = 1
+        while (index <= Math.floor(minutes / 5 * 2)) {
+            strip.setPixelColor(index - 1, neopixel.rgb(255, 255, 255))
+            strip.setPixelColor(index, neopixel.rgb(255, 255, 255))
+            strip.setBrightness(10)
+            index += 2
+        }
+    }
+    strip.show()
+}
+```
+
+## Step 19
+Finally lets add in three blocks, one ot each section of the if/else if/else statement block to define the colours when in each mode. 
+
+Drag a ``||neopixel: strip show Color||`` block in and choose a colour.
+
+Do this for the other two sections.
+
+```blocks
+let strip: neopixel.Strip = null
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+function lights () {
+    strip.clear()
+    if (reset == true) {
+        if (HoursOrMinutes == "Hours") {
+            strip.showColor(neopixel.colors(NeoPixelColors.Green))
+        } else if (HoursOrMinutes == "Minutes") {
+            strip.showColor(neopixel.colors(NeoPixelColors.Orange))
+        } else {
+            strip.showColor(neopixel.colors(NeoPixelColors.Blue))
+        }
+    } else {
+        index = 1
+        while (index <= Math.floor(minutes / 5 * 2)) {
+            strip.setPixelColor(index - 1, neopixel.rgb(50, 255, 126))
+            strip.setPixelColor(index, neopixel.colors(NeoPixelColors.Red))
+            strip.setBrightness(10)
+            index += 2
+        }
+    }
+    strip.show()
+}
+```
+
+## Finished
+You have now finished your clock code. Check that your code looks exactly like below before moving on as even the slightest error in the code can cause it to not work. 
+
+```blocks
+function lights () {
+    strip.clear()
+    if (reset == true) {
+        if (HoursOrMinutes == "Hours") {
+            strip.showColor(neopixel.colors(NeoPixelColors.Green))
+        } else if (HoursOrMinutes == "Minutes") {
+            strip.showColor(neopixel.colors(NeoPixelColors.Orange))
+        } else {
+            strip.showColor(neopixel.colors(NeoPixelColors.Blue))
+        }
+    } else {
+        index = 1
+        while (index <= Math.floor(minutes / 5 * 2)) {
+            strip.setPixelColor(index - 1, neopixel.rgb(50, 255, 126))
+            strip.setPixelColor(index, neopixel.colors(NeoPixelColors.Red))
+            strip.setBrightness(10)
+            index += 2
+        }
+    }
+    strip.show()
+}
+input.onButtonPressed(Button.A, function () {
+    if (reset == true) {
+        hours += 1
+        HoursOrMinutes = "Hours"
+        basic.showNumber(hours)
+    }
+})
+function changetime () {
+    if (minutes == 60) {
+        hours += 1
+        minutes = 0
+    }
+    if (hours == 13) {
+        hours = 1
+    }
+}
+input.onButtonPressed(Button.AB, function () {
+    if (reset == true) {
+        reset = false
+        HoursOrMinutes = "None"
+    } else {
+        reset = true
+    }
+})
+input.onButtonPressed(Button.B, function () {
+    if (reset == true) {
+        minutes += 1
+        HoursOrMinutes = "Minutes"
+        basic.showNumber(minutes)
+    }
+})
+let index = 0
+let HoursOrMinutes = ""
+let reset = false
+let strip: neopixel.Strip = null
+let minutes = 0
+let hours = 0
+hours = 1
+minutes = 0
+strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB)
+basic.forever(function () {
+    if (reset == false) {
+        basic.showNumber(hours)
+        basic.pause(1)
+        minutes += 1
+    }
+    changetime()
+    lights()
+})
 ```
