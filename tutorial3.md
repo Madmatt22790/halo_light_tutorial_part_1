@@ -40,7 +40,7 @@ function lights () {
 ```package
 neopixel=github:microsoft/pxt-neopixel#v0.7.5
 ```
-# Halo Light Clock Part 2
+# Halo Light Clock Part 3
 ## Introduction
 This tutorial is a continuation of the previous two tutorial which can be found [here](https://makecode.microbit.org/#tutorial:github:madmatt22790/halo_light_tutorial_part_1/tutorial) and [here](https://makecode.microbit.org/#tutorial:github:madmatt22790/halo_light_tutorial_part_1/tutorial2).
 
@@ -71,7 +71,7 @@ let reset = 0
 ## Step 2
 Next we need to define what the starting state for our reset variable is going to be.
 
-Under the ``||variables: variables||`` section there are two diamond blocks one saying true the other false. Despite these blocks being a diamond shape and our variable being a circular shape the diamond true block can be dragged into a variable.
+Under the ``||logic: logic||`` section there are two diamond blocks one saying true the other false. Despite these blocks being a diamond shape and our variable being a circular shape the diamond true block can be dragged into a variable.
 
 Do this to set our reset variable to start as false.
 
@@ -273,11 +273,11 @@ There isn't any need to define the variable in the on start function but instead
 
 In both the A and B button press functions place a ``||variable: set to||`` block underneath the ``||variable: change by||`` block. Call the new variable "HoursOrMinutes".
 
-In the A Button function have the HoursOrMinutes variable set to "Hours"
+In the A Button function drag a ``||text: text||`` block into the HoursOrMinutes variable and set it to "Hours"
 
-In the B Button function have the HoursOrMinutes variable set to "Minutes"
+In the B Button function drag a ``||text: text||`` block into the HoursOrMinutes variable and set it to "Minutes"
 
-In the A+B Button function have the HoursOrMinutes variable set to "None
+In the A+B Button function drag a ``||text: text||`` block into the HoursOrMinutes variable and set it to "None"
 ```blocks
 input.onButtonPressed(Button.A, function () {
     if (reset == true) {

@@ -81,7 +81,6 @@ Within this function we are going to add a few blocks the first of which being `
 
 This will clear the LED strip so that it is ready to light up the new LED's that we would like to illuminate.
 
-
 Drag those blocks in now. (Some may be in the ``||neopixel: more||`` tab)
 
 ```blocks
